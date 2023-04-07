@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ModuleElevenJS</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <main>
+      <h2>CRUD</h2>
+      <section>
+        <h3>Read (GET)</h3>
+        <div class="get-posts">
+          <button class="btn-posts">Get all posts</button>
+          <button class="btn-rest">REST</button>
+        </div>
+        <div>
+          <button class="btn-post">Get post to id</button>
+          <input type="number" min="1" max="100" class="post-id" />
+        </div>
+      </section>
+      <section>
+        <h3>Create (POST)</h3>
+        <!-- <form class="post-form">
+          <label for="author">Author</label>
+          <input type="text" id="author" class="author-name" />
+          <label for="body">Body</label>
+          <input type="text" id="body" class="body-fetch" />
+          <button type="submit" class="btn-add-post">Add post</button>
+        </form> -->
+        <button class="post-POST">POST</button>
+      </section>
+      <section>
+        <h3>Update (PUT and PATCH)</h3>
+        <button class="post-patch">PATCH</button>
+      </section>
+      <section>
+        <h3>Delete (DELETE)</h3>
+        <button class="btn-delete">DELETE</button>
+      </section>
+      <include src="./partials/exemple.html"></include>
+    </main>
+    <script src="./js/java-script.js" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+.btn-posts {
+    width: 120px;
+    height: 30px;
+
+    margin-right: 5px;
+    margin-bottom: 10px;
+
+    border: none;
+    border-radius: 4px;
+
+    background-color:rgb(166, 205, 234);
+}
+
+.btn-rest,
+.post-POST,
+.post-patch,
+.btn-delete {
+    width: 120px;
+    height: 30px;
+
+    border: none;
+    border-radius: 4px;
+}
+
+.btn-rest {
+    background-color:rgb(234, 166, 166);
+}
+
+.get-posts {
+    display: flex;
+}
+
+.btn-post {
+    /* display: block; */
+
+    width: 120px;
+    height: 30px;
+
+    border: none;
+    border-radius: 4px;
+
+    margin-bottom: 10px;
+
+    background-color:rgb(186, 234, 166);
+}
+
+/* Create (POST) */
+.btn-add-post {
+    width: 120px;
+    height: 30px;
+    
+}
+
+.btn-delete {
+    background-color:rgb(234, 79, 79);
+}
