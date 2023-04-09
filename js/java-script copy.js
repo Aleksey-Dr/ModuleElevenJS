@@ -144,16 +144,11 @@ btnDelete.addEventListener('click',
   // Find elements from html
   // Create object with elements
 const refs = {
-  searchForm: document.querySelector('.search-form'),
-  galleryImages: document.querySelector('.gallery'),
-  loadMoreBtn: document.querySelector('.load-more'),
+    searchForm: document.querySelector('.search-form'),
+    galleryImages: document.querySelector('.gallery'),
 };
 // console.log(refs.searchForm);
 // console.log(refs.galleryImages);
-// console.log(refs.loadMoreBtn);
-
-// Add class to the element loadMoreBtn for hiddening
-refs.loadMoreBtn.classList.add('is-hidden');
 
 // Add an object with parameters for query stryng
 // const parametersQuery = {
@@ -169,35 +164,23 @@ refs.loadMoreBtn.classList.add('is-hidden');
 const API_KEY = '35129314-12d9f6cafbe4df38ad9bc5f6b';
 
 // let termImages = '';
-// Add default value of a current page
-let currentPage = 1;
-let valueTermImages = '';
-let markup = '';
 
-// Add listeners
 // Add listeners by "submit" for form wist function fetchImages(term) in callback
 refs.searchForm.addEventListener('submit', onSearch);
-refs.loadMoreBtn.addEventListener('click', 
-  onLoadMore);
 
 // Add function onSearch
 function onSearch(evt) {
-  refs.loadMoreBtn.classList.remove('is-hidden');
   // stop reboot page
   evt.preventDefault();
   // Constant for a inputed term (for serach images)
   // Add method trim()
   const termImages = evt.currentTarget.elements.searchQuery.value.trim();;
   console.log(termImages);
-  if (valueTermImages !== termImages) {
-    // Add function for reset page by new termImages
-    restartPage();
-  }
-  valueTermImages = termImages;
-
   fetchImages(termImages)
-    .then(renderCards)
-    .catch(error => console.log(error));
+    .then(images => {
+      return images;
+    })
+    // .then(renderCountry);
 }
 
 // Add asynchronous function
@@ -207,58 +190,37 @@ async function fetchImages(term) {
   // Parts URL
   const frontURL = 'https://pixabay.com/api/?key=';
   const betweenURL = '&q=';
-  // Add per_page=40 for change default value of quantity items in response
-  const backURL = '&image_type=photo&orientation=horizontal&safesearch=true&per_page=40&page=';
-  // console.log('currentPage before:', currentPage);
+  const backURL = '&image_type=photo&orientation=horizontal&safesearch=true';
   // Complete URL
-  const url = frontURL + API_KEY + betweenURL + term + backURL + currentPage;
-  
+  let url = frontURL + API_KEY + betweenURL + term + backURL;
   const response = await fetch(url);
   const images = await response.json();
-  // console.log(images);
-  // Change page of response
-  currentPage += 1;
-  // console.log(currentPage);
-  return images;
+  return console.log(images);
 }
 
-// Add function for rendering markup when found images
-function renderCards(images) {
-  // console.log(images);
-  // Test by empty
-  if (images.totalHits !== 0) {
-    markup = images.hits
-      .map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) => {
-        // <a class="card-link" href='${largeImageURL}'>
-    return `<div class="photo-card">
-      <img class="card-img" src="${webformatURL}" alt="${tags}" loading="lazy"/>
-      <div class="info">
-        <p class="info-item">
-          <b>Likes:${likes}</b>
-        </p>
-        <p class="info-item">
-          <b>Views:${views}</b>
-        </p>
-        <p class="info-item">
-          <b>Comments:${comments}</b>
-        </p>
-        <p class="info-item">
-          <b>Downloads:${downloads}</b>
-        </p>
-      </div>
-    </div>`
-    // </a>
-      }).join('');
-    refs.galleryImages.innerHTML = markup;
-  } else {
-    console.log("Sorry, there are no images matching your search query. Please try again.");
-  }
-}
+// Add function create gallery
 
-function restartPage() {
-  currentPage = 1;
-}
 
-function onLoadMore() {
-  refs.galleryImages.insertAdjacentHTML('beforeend', markup);
-}
+// Add function for markup rendering
+// function renderCardsGallery(images) {
+//   galleryImages.innerHTML = '';
+//   const markup = images.map((image) => {
+//     return `<div class="photo-card">
+//   <img src="" alt="" loading="lazy" />
+//   <div class="info">
+//     <p class="info-item">
+//       <b>Likes</b>
+//     </p>
+//     <p class="info-item">
+//       <b>Views</b>
+//     </p>
+//     <p class="info-item">
+//       <b>Comments</b>
+//     </p>
+//     <p class="info-item">
+//       <b>Downloads</b>
+//     </p>`;
+//   })
+//     .join("");
+//   galleryImages.innerHTML = markup;
+// }
