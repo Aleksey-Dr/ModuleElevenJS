@@ -182,9 +182,11 @@ refs.loadMoreBtn.addEventListener('click',
 
 // Add function onSearch
 function onSearch(evt) {
-  refs.loadMoreBtn.classList.remove('is-hidden');
+  refs.loadMoreBtn.classList.add('is-hidden');
   // stop reboot page
   evt.preventDefault();
+  // Add clear gallary by submit
+  clearGallery();
   // Constant for a inputed term (for serach images)
   // Add method trim()
   const termImages = evt.currentTarget.elements.searchQuery.value.trim();;
@@ -249,8 +251,10 @@ function renderCards(images) {
     </div>`
     // </a>
       }).join('');
-    refs.galleryImages.innerHTML = markup;
+    refs.galleryImages.insertAdjacentHTML('beforeend', markup);
+    refs.loadMoreBtn.classList.remove('is-hidden');
   } else {
+    refs.loadMoreBtn.classList.add('is-hidden');
     console.log("Sorry, there are no images matching your search query. Please try again.");
   }
 }
@@ -259,6 +263,10 @@ function restartPage() {
   currentPage = 1;
 }
 
+function clearGallery() {
+  refs.galleryImages.innerHTML = '';
+}
+
 function onLoadMore() {
-  refs.galleryImages.insertAdjacentHTML('beforeend', markup);
+  fetchImages(valueTermImages).then(renderCards);
 }
